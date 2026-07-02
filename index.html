@@ -3,21 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Myco-Vent 6-Week Gantt Chart</title>
+  <title>Myco-Vent 6-Week Project Gantt Chart</title>
   <style>
     :root {
       --bg: #f7f5f0;
       --navy: #17324d;
-      --box1: #eaf4f7;
-      --box2: #edf5ec;
+      --blue: #eaf4f7;
+      --sage: #edf5ec;
       --text: #1f1f1f;
       --muted: #66727d;
-      --border: #8fa5ae;
-      --accent: #2f7f7a;
-      --accent2: #6b5b95;
-      --fill: #dfeaf0;
-      --fill2: #e3efe1;
-      --fill3: #e9e1f3;
+      --border: #7c93a0;
+      --accent: #3b6b4d;
+      --shadow: rgba(23,50,77,0.06);
     }
 
     * { box-sizing: border-box; }
@@ -30,28 +27,29 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    .wrap {
-      max-width: 1280px;
+    .card {
+      max-width: 1240px;
       margin: 0 auto;
-      background: rgba(255,255,255,0.45);
-      border: 1px solid rgba(23,50,77,0.12);
-      border-radius: 14px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(23,50,77,0.16);
+      border-radius: 6px;
       overflow: hidden;
+      box-shadow: 0 8px 24px var(--shadow);
     }
 
-    .topbar {
+    .header {
       background: var(--navy);
       color: #fff;
       padding: 18px 22px;
     }
 
-    .topbar h1 {
+    .header h1 {
       margin: 0 0 5px 0;
       font-size: 28px;
       line-height: 1.15;
     }
 
-    .topbar p {
+    .header p {
       margin: 0;
       font-size: 14px;
       color: rgba(255,255,255,0.82);
@@ -80,15 +78,16 @@
     .swatch {
       width: 12px;
       height: 12px;
-      border-radius: 50%;
+      border-radius: 2px;
       display: inline-block;
+      border: 1px solid rgba(23,50,77,0.18);
     }
 
     .table-scroll {
       overflow-x: auto;
-      border: 1px solid rgba(143,165,174,0.5);
-      border-radius: 12px;
-      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(124,147,160,0.45);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.78);
     }
 
     table {
@@ -99,13 +98,13 @@
     }
 
     thead th {
-      background: rgba(23,50,77,0.05);
-      color: var(--navy);
+      background: var(--navy);
+      color: #ffffff;
       font-weight: 700;
       text-align: left;
       padding: 12px 10px;
-      border-bottom: 1px solid rgba(143,165,174,0.45);
-      border-right: 1px solid rgba(143,165,174,0.25);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      border-right: 1px solid rgba(255,255,255,0.12);
       font-size: 14px;
     }
 
@@ -115,239 +114,81 @@
     }
 
     tbody td {
-      border-bottom: 1px solid rgba(143,165,174,0.28);
-      border-right: 1px solid rgba(143,165,174,0.18);
+      border-bottom: 1px solid rgba(124,147,160,0.28);
+      border-right: 1px solid rgba(124,147,160,0.18);
       padding: 12px 10px;
       vertical-align: top;
       font-size: 14px;
     }
 
     tbody tr:nth-child(odd) td.task {
-      background: rgba(234,244,247,0.55);
+      background: var(--blue);
     }
 
     tbody tr:nth-child(even) td.task {
-      background: rgba(237,245,236,0.55);
+      background: var(--sage);
     }
 
     tbody tr:nth-child(odd) td.owner {
-      background: rgba(234,244,247,0.25);
+      background: rgba(234,244,247,0.45);
     }
 
     tbody tr:nth-child(even) td.owner {
-      background: rgba(237,245,236,0.25);
+      background: rgba(237,245,236,0.45);
     }
 
-    .task-title {
-      font-weight: 700;
-      margin-bottom: 4px;
+    td.task { width: 290px; }
+
+    td.owner {
+      width: 170px;
+      font-weight: bold;
     }
 
-    .task-sub {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.35;
-    }
-
-    .owner {
-      width: 160px;
-      font-weight: 600;
-      color: #27313a;
-    }
-
-    .week {
-      width: 112px;
+    td.week {
+      width: 110px;
       text-align: center;
       vertical-align: middle;
-      padding: 10px 8px;
     }
 
     .bar {
       display: block;
-      height: 28px;
-      line-height: 28px;
-      border-radius: 999px;
+      padding: 6px 0;
+      border-radius: 3px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: bold;
       color: #17324d;
-      border: 1px solid rgba(23,50,77,0.14);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.55);
+      border: 1px solid rgba(23,50,77,0.16);
+      background: rgba(255,255,255,0.6);
     }
 
-    .b1 { background: var(--fill); }
-    .b2 { background: var(--fill2); }
-    .b3 { background: var(--fill3); }
+    .b1 { background: #eaf4f7; }
+    .b2 { background: #edf5ec; }
+    .b3 { background: #e5edf0; }
+
+    .small {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      margin-top: 4px;
+    }
 
     .note {
       margin-top: 14px;
-      color: var(--muted);
       font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .note strong {
-      color: var(--navy);
-    }
-
-    .footer {
-      padding: 0 18px 18px;
       color: var(--muted);
-      font-size: 12px;
+      line-height: 1.5;
     }
 
-    .chip {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: rgba(23,50,77,0.07);
-      color: var(--navy);
-      font-weight: 700;
-      margin-right: 6px;
-    }
+    .note strong { color: var(--navy); }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <h1>Myco-Vent — 6-Week Project Gantt Chart</h1>
-      <p>Imperial Science in Medicine project timeline · Team: Agsheyan (Lead), Tobias, Jack, Joe, Khushaal, Toby</p>
+  <div class="card">
+    <div class="header">
+      <h1>Myco-Vent — 6 Week Gantt Chart</h1>
+      <p>Imperial Science in Medicine project timeline</p>
     </div>
 
     <div class="content">
       <div class="legend">
-        <span class="legend-item"><span class="swatch" style="background: var(--navy);"></span> planning and coordination</span>
-        <span class="legend-item"><span class="swatch" style="background: var(--accent);"></span> research / evidence</span>
-        <span class="legend-item"><span class="swatch" style="background: #8aa0b2;"></span> poster build</span>
-        <span class="legend-item"><span class="swatch" style="background: var(--accent2);"></span> checks / final polish</span>
-      </div>
-
-      <div class="table-scroll">
-        <table aria-label="6-week Gantt chart for the Myco-Vent project">
-          <thead>
-            <tr>
-              <th style="width: 280px;">Task</th>
-              <th style="width: 170px;">Owner(s)</th>
-              <th>Week 1</th>
-              <th>Week 2</th>
-              <th>Week 3</th>
-              <th>Week 4</th>
-              <th>Week 5</th>
-              <th>Week 6</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="task">
-                <div class="task-title">Initial idea brainstorming</div>
-                <div class="task-sub">Picked the problem, discussed possible solutions, and agreed on Myco-Vent.</div>
-              </td>
-              <td class="owner">Whole team</td>
-              <td class="week"><span class="bar b1">Started</span></td>
-              <td class="week"><span class="bar b1">Built idea</span></td>
-              <td class="week"></td>
-              <td class="week"></td>
-              <td class="week"></td>
-              <td class="week"></td>
-            </tr>
-
-            <tr>
-              <td class="task">
-                <div class="task-title">Initial research</div>
-                <div class="task-sub">Looked into damp, mould, ventilation, humidity, and how mould affects respiratory health.</div>
-              </td>
-              <td class="owner">Tobias, Jack</td>
-              <td class="week"><span class="bar b2">Research</span></td>
-              <td class="week"><span class="bar b2">Sources</span></td>
-              <td class="week"><span class="bar b2">Notes</span></td>
-              <td class="week"></td>
-              <td class="week"></td>
-              <td class="week"></td>
-            </tr>
-
-            <tr>
-              <td class="task">
-                <div class="task-title">Concept refinement</div>
-                <div class="task-sub">Adjusted the device idea, made it simpler, and decided what features were realistic.</div>
-              </td>
-              <td class="owner">Agsheyan, Khushaal</td>
-              <td class="week"></td>
-              <td class="week"><span class="bar b1">Discuss</span></td>
-              <td class="week"><span class="bar b1">Refine</span></td>
-              <td class="week"></td>
-              <td class="week"></td>
-              <td class="week"></td>
-            </tr>
-
-            <tr>
-              <td class="task">
-                <div class="task-title">Poster design</div>
-                <div class="task-sub">Created the layout, section order, diagrams, colours, and text boxes for the poster.</div>
-              </td>
-              <td class="owner">Joe, Agsheyan</td>
-              <td class="week"></td>
-              <td class="week"></td>
-              <td class="week"><span class="bar b1">Draft 1</span></td>
-              <td class="week"><span class="bar b1">Draft 2</span></td>
-              <td class="week"><span class="bar b1">Refine</span></td>
-              <td class="week"></td>
-            </tr>
-
-            <tr>
-              <td class="task">
-                <div class="task-title">Component / cost check</div>
-                <div class="task-sub">Checked whether the device could plausibly stay near the £15 target.</div>
-              </td>
-              <td class="owner">Jack, Khushaal</td>
-              <td class="week"></td>
-              <td class="week"></td>
-              <td class="week"><span class="bar b2">Costing</span></td>
-              <td class="week"><span class="bar b2">Feasibility</span></td>
-              <td class="week"></td>
-              <td class="week"></td>
-            </tr>
-
-            <tr>
-              <td class="task">
-                <div class="task-title">Reference check</div>
-                <div class="task-sub">Made sure names, claims, and numbers matched the project notes and sources.</div>
-              </td>
-              <td class="owner">Toby</td>
-              <td class="week"></td>
-              <td class="week"></td>
-              <td class="week"></td>
-              <td class="week"><span class="bar b3">Check refs</span></td>
-              <td class="week"><span class="bar b3">Fix refs</span></td>
-              <td class="week"></td>
-            </tr>
-
-            <tr>
-              <td class="task">
-                <div class="task-title">Final checks</div>
-                <div class="task-sub">Looked over spelling, alignment, readability, and whether the poster felt finished.</div>
-              </td>
-              <td class="owner">Whole team</td>
-              <td class="week"></td>
-              <td class="week"></td>
-              <td class="week"></td>
-              <td class="week"></td>
-              <td class="week"><span class="bar b2">Review</span></td>
-              <td class="week"><span class="bar b2">Submit</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="note">
-        <span class="chip">Tip</span> If you paste this into GitHub, it will work as a single HTML file. The tasks are deliberately shared fairly evenly so it reads like a real group project timeline.
-      </div>
-      <div class="note">
-        <span class="chip">Easy edit</span> You can swap the owner names or week labels later without changing the layout.
-      </div>
-    </div>
-
-    <div class="footer">
-      Myco-Vent project timeline for the Imperial Science in Medicine poster.
-    </div>
-  </div>
-</body>
-</html>
+        <span class="legend-item"><span class="swatch" style="b
