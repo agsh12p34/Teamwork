@@ -1,93 +1,72 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Myco-Vent 6-Week Project Gantt Chart</title>
+  <title>Myco-Vent 6 Week Gantt Chart</title>
   <style>
-    :root {
-      --bg: #f7f5f0;
-      --navy: #17324d;
-      --blue: #eaf4f7;
-      --sage: #edf5ec;
-      --text: #1f1f1f;
-      --muted: #66727d;
-      --border: #7c93a0;
-      --accent: #3b6b4d;
-      --shadow: rgba(23,50,77,0.06);
-    }
-
-    * { box-sizing: border-box; }
-
     body {
       margin: 0;
-      padding: 28px;
-      background: var(--bg);
-      color: var(--text);
+      padding: 24px;
       font-family: Arial, Helvetica, sans-serif;
+      background: #f7f5f0;
+      color: #1f1f1f;
     }
 
-    .card {
-      max-width: 1240px;
+    .container {
+      max-width: 1250px;
       margin: 0 auto;
-      background: rgba(255,255,255,0.7);
-      border: 1px solid rgba(23,50,77,0.16);
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 8px 24px var(--shadow);
+      background: #ffffff;
+      border: 1px solid #8fa5ae;
     }
 
     .header {
-      background: var(--navy);
-      color: #fff;
-      padding: 18px 22px;
+      background: #17324d;
+      color: #ffffff;
+      padding: 16px 18px;
     }
 
     .header h1 {
-      margin: 0 0 5px 0;
-      font-size: 28px;
-      line-height: 1.15;
+      margin: 0;
+      font-size: 26px;
+      font-weight: 700;
     }
 
     .header p {
-      margin: 0;
+      margin: 6px 0 0 0;
       font-size: 14px;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.4;
-    }
-
-    .content {
-      padding: 18px;
+      color: #e9eef2;
     }
 
     .legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 18px;
-      margin-bottom: 14px;
+      padding: 14px 18px 6px 18px;
       font-size: 13px;
-      color: var(--muted);
+      color: #66727d;
     }
 
-    .legend-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+    .legend span {
+      display: inline-block;
+      margin-right: 16px;
+      margin-bottom: 6px;
     }
 
     .swatch {
-      width: 12px;
-      height: 12px;
-      border-radius: 2px;
       display: inline-block;
-      border: 1px solid rgba(23,50,77,0.18);
+      width: 11px;
+      height: 11px;
+      border: 1px solid #8fa5ae;
+      vertical-align: middle;
+      margin-right: 6px;
     }
 
-    .table-scroll {
+    .blue { background: #eaf4f7; }
+    .sage { background: #edf5ec; }
+    .check { background: #e5edf0; }
+
+    .table-wrap {
       overflow-x: auto;
-      border: 1px solid rgba(124,147,160,0.45);
-      border-radius: 4px;
-      background: rgba(255,255,255,0.78);
+      padding: 0 18px 18px 18px;
     }
 
     table {
@@ -95,100 +74,227 @@
       min-width: 1100px;
       border-collapse: collapse;
       table-layout: fixed;
+      border: 1px solid #8fa5ae;
     }
 
-    thead th {
-      background: var(--navy);
+    th, td {
+      border: 1px solid #8fa5ae;
+      padding: 10px;
+      vertical-align: middle;
+      font-size: 14px;
+      border-radius: 0;
+    }
+
+    th {
+      background: #17324d;
       color: #ffffff;
-      font-weight: 700;
       text-align: left;
-      padding: 12px 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-      border-right: 1px solid rgba(255,255,255,0.12);
-      font-size: 14px;
+      font-weight: 700;
     }
 
-    thead th:last-child,
-    tbody td:last-child {
-      border-right: none;
+    th.week {
+      text-align: center;
     }
 
-    tbody td {
-      border-bottom: 1px solid rgba(124,147,160,0.28);
-      border-right: 1px solid rgba(124,147,160,0.18);
-      padding: 12px 10px;
+    td.task {
+      width: 280px;
       vertical-align: top;
-      font-size: 14px;
+      background: #ffffff;
     }
-
-    tbody tr:nth-child(odd) td.task {
-      background: var(--blue);
-    }
-
-    tbody tr:nth-child(even) td.task {
-      background: var(--sage);
-    }
-
-    tbody tr:nth-child(odd) td.owner {
-      background: rgba(234,244,247,0.45);
-    }
-
-    tbody tr:nth-child(even) td.owner {
-      background: rgba(237,245,236,0.45);
-    }
-
-    td.task { width: 290px; }
 
     td.owner {
       width: 170px;
-      font-weight: bold;
+      background: #ffffff;
+      font-weight: 700;
     }
 
     td.week {
       width: 110px;
       text-align: center;
-      vertical-align: middle;
-    }
-
-    .bar {
-      display: block;
-      padding: 6px 0;
-      border-radius: 3px;
-      font-size: 12px;
-      font-weight: bold;
+      font-weight: 700;
       color: #17324d;
-      border: 1px solid rgba(23,50,77,0.16);
-      background: rgba(255,255,255,0.6);
     }
 
-    .b1 { background: #eaf4f7; }
-    .b2 { background: #edf5ec; }
-    .b3 { background: #e5edf0; }
+    tr.row-blue td.task,
+    tr.row-blue td.owner {
+      background: #eaf4f7;
+    }
 
-    .small {
-      color: var(--muted);
+    tr.row-sage td.task,
+    tr.row-sage td.owner {
+      background: #edf5ec;
+    }
+
+    tr.row-blue td.week.week-on {
+      background: #eaf4f7;
+    }
+
+    tr.row-sage td.week.week-on {
+      background: #edf5ec;
+    }
+
+    tr.row-check td.task,
+    tr.row-check td.owner {
+      background: #e5edf0;
+    }
+
+    tr.row-check td.week.week-on {
+      background: #e5edf0;
+    }
+
+    .task-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.25;
+    }
+
+    .task-sub {
       font-size: 12px;
       line-height: 1.35;
-      margin-top: 4px;
+      color: #66727d;
     }
 
     .note {
-      margin-top: 14px;
+      padding: 0 18px 18px 18px;
       font-size: 13px;
-      color: var(--muted);
       line-height: 1.5;
+      color: #66727d;
     }
-
-    .note strong { color: var(--navy); }
   </style>
 </head>
 <body>
-  <div class="card">
+  <div class="container">
     <div class="header">
       <h1>Myco-Vent — 6 Week Gantt Chart</h1>
       <p>Imperial Science in Medicine project timeline</p>
     </div>
 
-    <div class="content">
-      <div class="legend">
-        <span class="legend-item"><span class="swatch" style="b
+    <div class="legend">
+      <span><i class="swatch blue"></i> planning / early work</span>
+      <span><i class="swatch sage"></i> research / poster work</span>
+      <span><i class="swatch check"></i> final checks / polishing</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:280px;">Task</th>
+            <th style="width:170px;">Owner(s)</th>
+            <th class="week">Week 1</th>
+            <th class="week">Week 2</th>
+            <th class="week">Week 3</th>
+            <th class="week">Week 4</th>
+            <th class="week">Week 5</th>
+            <th class="week">Week 6</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-blue">
+            <td class="task">
+              <div class="task-title">Initial idea brainstorming</div>
+              <div class="task-sub">Talked through possible ideas and picked Myco-Vent.</div>
+            </td>
+            <td class="owner">Whole team</td>
+            <td class="week week-on">Start</td>
+            <td class="week week-on">Agree idea</td>
+            <td class="week"></td>
+            <td class="week"></td>
+            <td class="week"></td>
+            <td class="week"></td>
+          </tr>
+
+          <tr class="row-sage">
+            <td class="task">
+              <div class="task-title">Initial research</div>
+              <div class="task-sub">Looked at mould, damp homes, ventilation, and respiratory health.</div>
+            </td>
+            <td class="owner">Tobias, Jack</td>
+            <td class="week week-on">Research</td>
+            <td class="week week-on">Read more</td>
+            <td class="week week-on">Notes</td>
+            <td class="week"></td>
+            <td class="week"></td>
+            <td class="week"></td>
+          </tr>
+
+          <tr class="row-blue">
+            <td class="task">
+              <div class="task-title">Design changes</div>
+              <div class="task-sub">Made the concept simpler and chose the parts we could realistically use.</div>
+            </td>
+            <td class="owner">Agsheyan, Khushaal</td>
+            <td class="week"></td>
+            <td class="week week-on">Discuss</td>
+            <td class="week week-on">Change design</td>
+            <td class="week"></td>
+            <td class="week"></td>
+            <td class="week"></td>
+          </tr>
+
+          <tr class="row-sage">
+            <td class="task">
+              <div class="task-title">Poster design</div>
+              <div class="task-sub">Worked on layout, boxes, diagrams, colours, and headings.</div>
+            </td>
+            <td class="owner">Joe, Agsheyan</td>
+            <td class="week"></td>
+            <td class="week"></td>
+            <td class="week week-on">Draft 1</td>
+            <td class="week week-on">Draft 2</td>
+            <td class="week week-on">Tidy up</td>
+            <td class="week"></td>
+          </tr>
+
+          <tr class="row-blue">
+            <td class="task">
+              <div class="task-title">Cost / feasibility check</div>
+              <div class="task-sub">Did a rough cost check and checked the device still seemed realistic.</div>
+            </td>
+            <td class="owner">Jack, Khushaal</td>
+            <td class="week"></td>
+            <td class="week"></td>
+            <td class="week week-on">Costing</td>
+            <td class="week week-on">Feasibility</td>
+            <td class="week"></td>
+            <td class="week"></td>
+          </tr>
+
+          <tr class="row-check">
+            <td class="task">
+              <div class="task-title">Reference check</div>
+              <div class="task-sub">Checked names, claims, and numbers against the project notes.</div>
+            </td>
+            <td class="owner">Toby</td>
+            <td class="week"></td>
+            <td class="week"></td>
+            <td class="week"></td>
+            <td class="week week-on">Check refs</td>
+            <td class="week week-on">Fix refs</td>
+            <td class="week"></td>
+          </tr>
+
+          <tr class="row-sage">
+            <td class="task">
+              <div class="task-title">Final checks</div>
+              <div class="task-sub">Looked at spelling, spacing, readability, and overall finish.</div>
+            </td>
+            <td class="owner">Whole team</td>
+            <td class="week"></td>
+            <td class="week"></td>
+            <td class="week"></td>
+            <td class="week"></td>
+            <td class="week week-on">Review</td>
+            <td class="week week-on">Submit</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      This version uses the same ivory, navy, blue, sage, and slate-grey palette as the poster, with no rounded corners and no inner boxes.
+    </div>
+  </div>
+</body>
+</html>
+```
